@@ -72,6 +72,25 @@ public class BFSTree {
 
     }
 
+    /**
+     * 递归方式实现树的层次遍历
+     * @param root
+     */
+    public static void BFS(TreeNode root,int deep){
+        //base check
+        if(root == null){
+            return;
+        }
+        deep++;
+        if(resList.size()<deep){
+            List<Integer> tempList = new ArrayList<>();
+            resList.add(tempList);
+        }
+        resList.get(deep-1).add(root.val);
+        BFS(root.left,deep);
+        BFS(root.right,deep);
+    }
+
     public static void main(String[] args) {
         TreeNode root = new TreeNode(0);
         TreeNode left = new TreeNode(1);
@@ -82,7 +101,7 @@ public class BFSTree {
         root.right = right;
         right.left = new TreeNode(5);
         right.right = new TreeNode(6);
-        BFS(root);
+        BFS(root,0);
         resList.forEach(System.out::println);
     }
 }
