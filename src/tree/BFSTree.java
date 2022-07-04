@@ -5,7 +5,7 @@ import java.util.*;
 public class BFSTree {
     public static List<List<Integer>> resList = new ArrayList<List<Integer>>();
 
-    //DFS--递归方式
+    //BFS--递归方式
     public static void checkFun01(TreeNode node, Integer deep) {
         if (node == null) return;
         deep++;

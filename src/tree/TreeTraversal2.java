@@ -25,6 +25,32 @@ public class TreeTraversal2 {
         return result;
     }
 
+    /**
+     * 迭代法-前序遍历
+     * @param root
+     * @return
+     */
+    public static List<Integer> preOrder(TreeNode root){
+        List<Integer> result = new ArrayList<>();
+        //base check
+        if(root == null){
+            return result;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        stack.add(root);
+        while(!stack.isEmpty()){
+            TreeNode node = stack.pop();
+            result.add(node.val);
+            if(node.right!=null){
+                stack.add(node.right);
+            }
+            if(node.left!=null){
+                stack.add(node.left);
+            }
+        }
+        return result;
+    }
+
     public static List<Integer> inOrderTraversal(TreeNode root){
         List<Integer> result = new ArrayList<>();
         if(root == null){
@@ -44,6 +70,30 @@ public class TreeTraversal2 {
         }
         return result;
     }
+
+    /**
+     * 迭代法实现中序遍历
+     * @param root
+     * @return
+     */
+    public static List<Integer> inOrder(TreeNode root){
+        List<Integer> result = new ArrayList<>();
+        //base check
+        if(root == null){
+            return result;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        stack.add(root);
+        while(!stack.empty()){
+            int size = stack.size();
+            while(size-->0){
+                TreeNode node = stack.pop();
+
+            }
+        }
+        return null;
+    }
+
 
     /**
      * 后序遍历
@@ -110,8 +160,12 @@ public class TreeTraversal2 {
         root.right = right;
         right.left = new TreeNode(5);
         right.right = new TreeNode(6);
-        List<Integer> integers = preorderTraversal(root);
-        integers.forEach(System.out::println);
+        List<Integer> result1 = preorderTraversal(root);
+        List<Integer> result2 = preOrder(root);
+        result1.forEach(System.out::println);
+        System.out.println("=========================================");
+        result2.forEach(System.out::println);
+
     }
 
 }
