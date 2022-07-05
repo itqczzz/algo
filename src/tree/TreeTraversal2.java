@@ -83,15 +83,18 @@ public class TreeTraversal2 {
             return result;
         }
         Stack<TreeNode> stack = new Stack<>();
-        stack.add(root);
-        while(!stack.empty()){
-            int size = stack.size();
-            while(size-->0){
-                TreeNode node = stack.pop();
-
+        TreeNode cur = root;
+        while(cur!=null||!stack.isEmpty()){
+            if(cur != null){
+                stack.push(cur);
+                cur = cur.left;
+            }else{
+                cur = stack.pop();
+                result.add(cur.val);
+                cur = cur.right;
             }
         }
-        return null;
+        return result;
     }
 
 
@@ -160,7 +163,7 @@ public class TreeTraversal2 {
         root.right = right;
         right.left = new TreeNode(5);
         right.right = new TreeNode(6);
-        List<Integer> result1 = preorderTraversal(root);
+        List<Integer> result1 = inOrderTraversal(root);
         List<Integer> result2 = preOrder(root);
         result1.forEach(System.out::println);
         System.out.println("=========================================");
