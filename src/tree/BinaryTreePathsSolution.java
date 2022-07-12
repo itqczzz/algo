@@ -2,6 +2,7 @@ package tree;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * https://leetcode.cn/problems/binary-tree-paths/
@@ -49,6 +50,39 @@ public class BinaryTreePathsSolution {
         }
     }
 
+    /**
+     * 迭代法
+     * @param root
+     * @return
+     */
+    public List<String> binaryTreePaths1(TreeNode root) {
+        List<String> res = new ArrayList<>();
+        if(root == null){
+            return res;
+        }
+        Stack<Object> stack = new Stack<>();
+        stack.push(root);
+        stack.push(root.val+"");
+        while (!stack.isEmpty()){
+            String path = (String)stack.pop();
+            TreeNode node = (TreeNode)stack.pop();
+            if(node.left == null && node.right == null){
+                res.add(path);
+            }
+            if(node.left != null){
+                stack.push(node.left);
+                stack.push(path + "->" + node.left.val);
+            }
+            if(node.right != null){
+                stack.push(node.right);
+                stack.push(path + "->" + node.right.val);
+            }
+        }
+        return res;
+    }
+
+
+
     public static void main(String[] args) {
         TreeNode root = new TreeNode(0);
         TreeNode left = new TreeNode(1);
@@ -60,7 +94,7 @@ public class BinaryTreePathsSolution {
         right.left = new TreeNode(5);
         right.right = new TreeNode(6);
         BinaryTreePathsSolution binaryTreePathsSolution = new BinaryTreePathsSolution();
-        List<String> res = binaryTreePathsSolution.binaryTreePaths(root);
+        List<String> res = binaryTreePathsSolution.binaryTreePaths1(root);
         res.forEach(System.out::println);
     }
 }
