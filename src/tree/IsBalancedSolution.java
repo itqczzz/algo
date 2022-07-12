@@ -10,14 +10,7 @@ public class IsBalancedSolution {
      * @return
      */
     public boolean isBalanced(TreeNode root) {
-        if(root == null){
-            return false;
-        }
-        int heightTreeNode = heightTreeNode(root);
-        if(heightTreeNode > 1){
-            return false;
-        }
-        return true;
+        return heightTreeNode(root) != -1;
     }
 
     public int heightTreeNode(TreeNode root){
@@ -25,21 +18,29 @@ public class IsBalancedSolution {
             return 0;
         }
         int leftHeight = heightTreeNode(root.left);
+        if(leftHeight == -1){
+            return -1;
+        }
         int rightHeight = heightTreeNode(root.right);
-        return Math.abs(leftHeight-rightHeight);
+        if (rightHeight == -1){
+            return -1;
+        }
+        int abs = Math.abs(leftHeight - rightHeight);
+        if(abs > 1){
+            return -1;
+        }
+        return Math.max(leftHeight,rightHeight) + 1;
     }
     public static void main(String[] args) {
         TreeNode root = new TreeNode(3);
         TreeNode left = new TreeNode(9);
+        TreeNode right = new TreeNode(20);
         root.left = left;
-        left.left = new TreeNode(3);
-        left.right = new TreeNode(4);
-        TreeNode right = new TreeNode(2);
         root.right = right;
-        right.left = new TreeNode(5);
-        right.right = new TreeNode(6);
-        InvertTreeSolution invertTreeSolution = new InvertTreeSolution();
-        invertTreeSolution.invertTree(root);
+        right.left = new TreeNode(15);
+        right.right = new TreeNode(7);
+        IsBalancedSolution isBalancedSolution = new IsBalancedSolution();
+        isBalancedSolution.isBalanced(root);
         System.out.println(root);
     }
 
