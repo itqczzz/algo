@@ -3,7 +3,6 @@ package tree;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 public class PathSumSolution {
     List<List<Integer>> ret = new LinkedList<>();
