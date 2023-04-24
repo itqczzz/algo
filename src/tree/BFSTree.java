@@ -3,6 +3,7 @@ package tree;
 import java.util.*;
 
 public class BFSTree {
+
     public static List<List<Integer>> resList = new ArrayList<List<Integer>>();
 
     //BFS--递归方式
