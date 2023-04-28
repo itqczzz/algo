@@ -1,5 +1,6 @@
 package array;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,11 +51,27 @@ public class MajorityElement {
         return candidate;
     }
 
+    public int majorityElement3(int[] nums) {
+        int n = nums.length;
+        //排序
+        Arrays.sort(nums);
+        int cur = 0;
+        for(int i = 1;i < n;i++){
+            if((i - cur+1) > (n/2)){
+                return nums[cur];
+            }
+            if(nums[i] != nums[cur]){
+                cur = i;
+            }
+        }
+        return - 1;
+    }
+
 
     public static void main(String[] args) {
         MajorityElement majorityElement = new MajorityElement();
         int[] nums = new int[]{2,2,1,1,1,2,2};
-        int i = majorityElement.majorityElement2(nums);
+        int i = majorityElement.majorityElement3(nums);
         System.out.println(i);
     }
 }
