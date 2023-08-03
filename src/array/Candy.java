@@ -31,10 +31,41 @@ public class Candy {
         return candySum;
     }
 
+    public int candy1(int[] ratings) {
+        int[] pre = new int[ratings.length];
+        int[] post = new int[ratings.length];
+
+        pre[0] = 1;
+        for (int i = 1; i < ratings.length; i++) {
+            if (ratings[i] > ratings[i - 1]) {
+                pre[i] = pre[i - 1] + 1;
+            } else {
+                pre[i] = 1;
+            }
+        }
+
+        post[ratings.length - 1] = 1;
+        for (int i = ratings.length - 2; i >= 0; i--) {
+            if (ratings[i] > ratings[i + 1]) {
+                post[i] = post[i + 1] + 1;
+            } else {
+                post[i] = 1;
+            }
+        }
+
+        int sum = 0;
+        for (int i = 0; i < ratings.length; i++) {
+            sum += Math.max(pre[i], post[i]);
+        }
+        return sum;
+    }
+
+
+
     public static void main(String[] args) {
-        int[] ratings = new int[]{1,3,2,2,1};
+        int[] ratings = new int[]{1,0,2};
         Candy candy = new Candy();
-        int candySum = candy.candy(ratings);
+        int candySum = candy.candy1(ratings);
         System.out.println(candySum);
     }
 }
