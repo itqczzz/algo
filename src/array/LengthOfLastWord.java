@@ -18,9 +18,26 @@ public class LengthOfLastWord {
         return end-start+1;
     }
 
+    public int lengthOfLastWord2(String s) {
+        int count = 0;
+        int n = s.length();
+        for (int i = n - 1; i >= 0; i--) {
+            if(s.charAt(i) == ' ' && count == 0){
+                continue;
+            }
+            if(s.charAt(i) != ' '){
+                count++;
+            }
+            if(s.charAt(i) == ' ' && count > 0){
+                break;
+            }
+        }
+        return count;
+    }
+
     public static void main(String[] args) {
         LengthOfLastWord lengthOfLastWord = new LengthOfLastWord();
-        int hello_world = lengthOfLastWord.lengthOfLastWord(" a 123");
+        int hello_world = lengthOfLastWord.lengthOfLastWord2(" a 123");
         System.out.println(hello_world);
     }
 }
